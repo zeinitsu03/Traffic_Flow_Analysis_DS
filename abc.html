@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shree Mahalaxmi Enterprises - Premium Industrial Press Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #8B6B3D;
+            --secondary: #D2B48C;
+            --light: #F3EADC;
+            --dark: #3C2F1F;
+            --accent: #BE8C40;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(139, 107, 61, 0.5);
+            pointer-events: none;
+            z-index: 1000;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: rgba(60, 47, 31, 0.95);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.7rem 2rem;
+            background-color: rgba(60, 47, 31, 0.98);
+        }
+
+        .logo {
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo span {
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover span {
+            transform: translateY(-100%);
+            animation: bumpText 0.5s forwards;
+        }
+
+        @keyframes bumpText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 0 5rem;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, transparent, rgba(60, 47, 31, 0.2) 70%);
+            top: -25%;
+            left: -25%;
+            animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            color: var(--light);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpIn 1s forwards 0.5s;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            color: var(--light);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpIn 1s forwards 0.8s;
+        }
+
+        @keyframes fadeUpIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpIn 1s forwards 1.1s;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1.5s, bounce 2s infinite 1.5s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Floating particles */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: floatUp var(--duration) infinite ease-in-out;
+            animation-delay: var(--delay);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(60, 47, 31, 0.95);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--light);
+            cursor: pointer;
+        }
+
+        .mobile-menu-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Particles container -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">Shree <span>Mahalaxmi</span> Enterprises</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#home" class="mobile-link">Home</a>
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#services" class="mobile-link">Services</a>
+            <a href="#portfolio" class="mobile-link">Portfolio</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Precision <span>Press Machines</span> for Modern Industry</h1>
+            <p>Leading manufacturer of high-performance industrial press machines with over 30 years of experience. We deliver quality, precision, and reliability for all your manufacturing needs.</p>
+            <a href="#contact" class="btn">Get a Quote</a>
+        </div>
+        <div class="scroll-down" id="scrollDown">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>About <span>Us</span></h2>
+                <div class="separator"></div>
+                <p class="subtitle">Three decades of excellence in precision engineering</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image" data-aos="fade-right">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc" alt="Our Factory">
+                        <div class="experience-badge">
+                            <span class="years">30+</span>
+                            <span class="text">YEARS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-text" data-aos="fade-left">
+                    <h3>Premium Industrial Equipment Since 1994</h3>
+                    <p>Shree Mahalaxmi Enterprises has been at the forefront of industrial press manufacturing for over three decades. What started as a small workshop has grown into one of India's most respected manufacturers of precision press machines.</p>
+                    <p>Our commitment to quality, innovation, and customer satisfaction has earned us the trust of major industries across automotive, aerospace, electronics, and more.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="500">0</div>
+                            <div class="stat-label">Clients Worldwide</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="1200">0</div>
+                            <div class="stat-label">Machines Delivered</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="24">0</div>
+                            <div class="stat-label">Countries Served</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#services" class="btn about-btn">Our Services <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our <span>Services</span></h2>
+                <div class="separator"></div>
+                <p class="subtitle">Comprehensive solutions for all your manufacturing needs</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Machine Manufacturing</h3>
+                    <p>Custom-designed hydraulic and mechanical press machines built to your exact specifications.</p>
+                    <div class="service-hover">
+                        <ul>
+                            <li>Hydraulic Presses</li>
+                            <li>Mechanical Presses</li>
+                            <li>Servo Presses</li>
+                            <li>Custom Solutions</li>
+                        </ul>
+                        <a href="#contact" class="service-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Maintenance & Repair</h3>
+                    <p>Expert maintenance and repair services to keep your machinery running at peak performance.</p>
+                    <div class="service-hover">
+                        <ul>
+                            <li>Preventive Maintenance</li>
+                            <li>Emergency Repairs</li>
+                            <li>Parts Replacement</li>
+                            <li>Performance Optimization</li>
+                        </ul>
+                        <a href="#contact" class="service-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Machine Upgrades</h3>
+                    <p>Modernize your existing equipment with the latest technology and control systems.</p>
+                    <div class="service-hover">
+                        <ul>
+                            <li>Control System Updates</li>
+                            <li>Automation Integration</li>
+                            <li>Performance Enhancements</li>
+                            <li>Safety Upgrades</li>
+                        </ul>
+                        <a href="#contact" class="service-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Operator Training</h3>
+                    <p>Comprehensive training programs to ensure your team can operate our machines safely and efficiently.</p>
+                    <div class="service-hover">
+                        <ul>
+                            <li>Operation Basics</li>
+                            <li>Maintenance Training</li>
+                            <li>Safety Protocols</li>
+                            <li>Advanced Operations</li>
+                        </ul>
+                        <a href="#contact" class="service-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our <span>Portfolio</span></h2>
+                <div class="separator"></div>
+                <p class="subtitle">Featured projects and custom solutions</p>
+            </div>
+            
+            <div class="portfolio-filter" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="hydraulic">Hydraulic Presses</button>
+                <button class="filter-btn" data-filter="mechanical">Mechanical Presses</button>
+                <button class="filter-btn" data-filter="custom">Custom Solutions</button>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item hydraulic" data-aos="fade-up">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5" alt="Hydraulic Press">
+                        <div class="portfolio-overlay">
+                            <h4>200-Ton Hydraulic Press</h4>
+                            <p>Automotive manufacturing solution for a leading car parts manufacturer.</p>
+                            <a href="#" class="portfolio-link" data-modal="modal1"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item mechanical" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1565034957450-9f3e9845af74" alt="Mechanical Press">
+                        <div class="portfolio-overlay">
+                            <h4>Precision Mechanical Press</h4>
+                            <p>High-speed stamping solution for electronics components.</p>
+                            <a href="#" class="portfolio-link" data-modal="modal2"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item custom" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1581093577421-f561a654a353" alt="Custom Solution">
+                        <div class="portfolio-overlay">
+                            <h4>Custom Automated Press Line</h4>
+                            <p>Fully integrated production line for aerospace components.</p>
+                            <a href="#" class="portfolio-link" data-modal="modal3"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item hydraulic" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1587929501535-1e2d559be397" alt="Hydraulic System">
+                        <div class="portfolio-overlay">
+                            <h4>Multi-Function Hydraulic System</h4>
+                            <p>Versatile solution for a pharmaceutical packaging company.</p>
+                            <a href="#" class="portfolio-link" data-modal="modal4"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Portfolio Modals -->
+            <div id="modal1" class="portfolio-modal">
+                <div class="modal-content">
+                    <span class="modal-close">&times;</span>
+                    <h3>200-Ton Hydraulic Press</h3>
+                    <div class="modal-gallery">
+                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5" alt="Hydraulic Press">
+                    </div>
+                    <div class="modal-details">
+                        <p>This 200-ton hydraulic press was custom designed for a leading automotive parts manufacturer. The system features advanced control systems, automated material handling, and precision pressure control.</p>
+                        <ul>
+                            <li><strong>Client:</strong> Automotive Industry Leader</li>
+                            <li><strong>Capacity:</strong> 200 Tons</li>
+                            <li><strong>Features:</strong> PLC Controls, Safety Light Curtains, Quick Die Change System</li>
+                            <li><strong>Year:</strong> 2023</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
